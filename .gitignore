@@ -36,7 +36,6 @@ yarn-debug.log*
 .yarn-integrity
 
 /vendor/bundle
-docs/
 /public/uploades
 .DS_Store
 .env
