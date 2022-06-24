@@ -19,7 +19,8 @@ RSpec.describe 'The function of task management', type: :system do
     context 'visiting index page' do
       it 'is shown all created tasks' do
         visit tasks_path
-        expect(page).to have_content 'default'
+        expect(page).to have_content 'title 1'
+        expect(page).to have_content 'title 2'
       end
     end
   end
