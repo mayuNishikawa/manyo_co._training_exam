@@ -2,40 +2,33 @@
 
 ## User model
 
-+ id
-
-+ name: string
-
-+ email: string
-
-+password_digest: string
+| TH Column | TH Type |
+| ------- | -------- |
+| name | string |
+| email | string |
+| password_digest | string |
 
 ## Task model
 
-+ id
-
-+ user_id
-
-+ name: string
-
-+ content: text
-
-+ deadline: date
-
-+ priority:integer
-
-+ status: string
+| TH Column | TH Type |
+| ------- | -------- |
+| user_id | references |
+| name | string |
+| content | text |
+| deadline | date |
+| property | integer |
+| status | string |
 
 ## TaskLabel model
 
-+ id
+| TH Column | TH Type |
+| ------- | -------- |
+| task_id | references |
+| label_id | references |
 
-+ task_id
-
-+label_id
 
 ## Label
 
-+id
-
-+name
+| TH Column | TH Type |
+| ------- | -------- |
+| name | string |
