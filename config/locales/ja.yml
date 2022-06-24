@@ -1,4 +1,14 @@
 ja:
+  view:
+    error_count: '件のエラーがあります。'
+    tasks: 'タスク一覧'
+    name: 'タスク名'
+    content: '詳細'
+    edit: '編集'
+    back: '戻る'
+    show: '詳細'
+    destroy: '削除'
+    new_task: '新規作成'
   activerecord:
     errors:
       messages:
@@ -11,7 +21,7 @@ ja:
     attributes:
       task:
         name: 'タスク名'
-        content: '内容'
+        content: '詳細'
   date:
     abbr_day_names:
     - 日
