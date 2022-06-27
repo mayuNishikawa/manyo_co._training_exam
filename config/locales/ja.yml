@@ -10,6 +10,7 @@ ja:
     destroy: '削除'
     new_task: '新規作成'
     deadline: '終了期限'
+    sort_link_deadline: '終了期限でソートする'
   activerecord:
     errors:
       messages:
