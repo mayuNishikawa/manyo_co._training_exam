@@ -10,7 +10,15 @@ ja:
     destroy: '削除'
     new_task: '新規作成'
     deadline: '終了期限'
+    search_button: '検索'
+    search_by_status: 'ステータスで検索'
     sort_link_deadline: '終了期限でソートする'
+  enums:
+    task:
+      status:
+        not_yet: '未着手'
+        doing: '着手中'
+        done: '完了'
   activerecord:
     errors:
       messages:
@@ -25,6 +33,7 @@ ja:
         name: 'タスク名'
         content: '詳細'
         deadline: '終了期限'
+        status: 'ステータス'
   date:
     abbr_day_names:
     - 日

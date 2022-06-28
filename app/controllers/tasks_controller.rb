@@ -3,10 +3,13 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    if params[:task].present?
-      @tasks = Task.search(params[:task][:name])
-    else
-      @tasks = Task.all.order("#{sort_column} #{sort_direction}")
+    @tasks = Task.all.order("#{sort_column} #{sort_direction}") and return unless params[:task].present?
+    if params[:task][:status].present? && params[:task][:name].present?
+      @tasks = Task.search_by_both(params[:task][:status], params[:task][:name])
+    elsif params[:task][:status].present?
+      @tasks = Task.search_by_status(params[:task][:status])
+    elsif params[:task][:name]
+      @tasks = Task.search_by_name(params[:task][:name])
     end
   end
 
