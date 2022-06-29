@@ -3,7 +3,8 @@
 <h1><%= t('view.tasks') %></h1>
 
 <%= form_with(url: tasks_path, local: true, method: :get, scope: :task ) do |f| %>
-  <%= f.select :status, options_for_select(Task.statuses.keys.to_a.map {|k| [I18n.t("enums.task.status.#{k}"), k]}),{prompt: t('view.search_by_status')} %>
+  <%= f.select :status, options_for_select(Task.statuses.keys.to_a.map {
+    |k| [I18n.t("enums.task.status.#{k}"), k]}),{prompt: t('view.search_by_status')} %>
   <%= f.text_field :name, value: params[:name] %>
   <%= f.submit t('view.search_button') %>
 <% end %>
@@ -14,7 +15,8 @@
   <thead>
     <tr>
       <th><%= t('view.name') %></th>
-      <th> <%= t('view.deadline') %></th>
+      <th><%= t('view.deadline') %></th>
+      <th><%= t('view.status') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,6 +26,7 @@
       <tr class="task_row">
         <td><%= task.name %></td>
         <td><%= time_display(task.deadline) %></td>
+        <td><%= t("enums.task.status.#{task.status}") %></td>
         <td><%= link_to t('view.show'), task %></td>
         <td><%= link_to t('view.edit'), edit_task_path(task) %></td>
         <td><%= link_to t('view.destroy'), task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
