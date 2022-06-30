@@ -10,6 +10,7 @@
 <% end %>
 
 <%= link_to t('view.sort_link_deadline'), sort: :deadline, direction: :desc %>
+<%= link_to t('view.sort_link_priority'), sort: :priority, direction: :asc %>
 
 <table>
   <thead>
@@ -17,6 +18,7 @@
       <th><%= t('view.name') %></th>
       <th><%= t('view.deadline') %></th>
       <th><%= t('view.status') %></th>
+      <th><%= t('view.priority') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -27,6 +29,7 @@
         <td><%= task.name %></td>
         <td><%= time_display(task.deadline) %></td>
         <td><%= t("enums.task.status.#{task.status}") %></td>
+        <td><%= t("enums.task.priority.#{task.priority}") %></td>
         <td><%= link_to t('view.show'), task %></td>
         <td><%= link_to t('view.edit'), edit_task_path(task) %></td>
         <td><%= link_to t('view.destroy'), task, method: :delete, data: { confirm: 'Are you sure?' } %></td>

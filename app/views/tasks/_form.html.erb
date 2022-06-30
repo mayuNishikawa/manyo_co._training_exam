@@ -26,10 +26,16 @@
     <%= f.datetime_field :deadline %>
   </div>
 
-  <div class="field">
+  <div class="    field">
     <%= f.label :status %>
-    <%= f.select :status, options_for_select(Task.statuses.keys.to_a.map {
-      |k| [I18n.t("enums.task.status.#{k}"), k]}),{prompt: t('view.search_by_status')} %>
+    <%= f.select :status, options_for_select(Task.statuses.keys.map {
+      |k| [I18n.t("enums.task.status.#{k}"), k] }),{ prompt: t('view.search_by_status') } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :priority %>
+    <%= f.select :priority, options_for_select(Task.priorities.keys.map {
+      |k| [t("enums.task.priority.#{k}"), k]}),{ prompt: t('view.search_by_priority') } %>
   </div>
 
   <div class="actions">
