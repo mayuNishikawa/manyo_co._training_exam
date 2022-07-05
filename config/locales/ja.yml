@@ -1,6 +1,10 @@
 ja:
   view:
+    task_manager: 'Task Manager'
+    create_task: 'タスク登録'
     tasks: 'タスク一覧'
+    account_details: 'アカウント詳細'
+    logout: 'ログアウト'
     search_by_status: 'ステータスで検索'
     search_button: '検索'
     sort_link_deadline: '終了期限でソートする'

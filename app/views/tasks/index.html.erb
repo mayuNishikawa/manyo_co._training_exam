@@ -2,8 +2,7 @@
 
 <h1><%= t('view.tasks') %></h1>
 
-
-<%= form_with(url: tasks_path, local: true, method: :get, scope: :task ) do |f| %>
+<%= form_with(url: tasks_path, local: true, method: :get, scope: :task, class: "form-group" ) do |f| %>
   <div class="form-row">
     <div class="col-2">
       <%= f.select :status, options_for_select(Task.statuses.keys.to_a.map {
@@ -18,15 +17,15 @@
   </div>
 <% end %>
 
-<%= link_to t('view.new_task'), new_task_path %>
+<%= link_to t('view.new_task'), new_task_path, class: "btn btn-outline-primary", id: "create_btn" %>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th><%= t('view.name') %></th>
-      <th><%= link_to t('view.deadline'), sort: :deadline, direction: :desc %></th>
-      <th><%= t('view.status') %></th>
-      <th><%= link_to t('view.priority'), sort: :priority, direction: :asc %></th>
+      <th scope="col"><%= t('view.name') %></th>
+      <th scope="col"><%= link_to t('view.deadline'), sort: :deadline, direction: :desc %></th>
+      <th scope="col"><%= t('view.status') %></th>
+      <th scope="col"><%= link_to t('view.priority'), sort: :priority, direction: :asc %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -34,10 +33,10 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr class="task_row">
-        <td><%= task.name %></td>
-        <td><%= time_display(task.deadline) %></td>
-        <td><%= t("enums.task.status.#{task.status}") %></td>
-        <td><%= t("enums.task.priority.#{task.priority}") %></td>
+        <td scope="col"><%= task.name %></td>
+        <td scope="col"><%= time_display(task.deadline) %></td>
+        <td scope="col"><%= t("enums.task.status.#{task.status}") %></td>
+        <td scope="col"><%= t("enums.task.priority.#{task.priority}") %></td>
         <td><%= link_to t('view.show'), task, class: "btn btn-outline-info" %></td>
         <td><%= link_to t('view.edit'), edit_task_path(task), class: "btn btn-outline-warning" %></td>
         <td><%= link_to t('view.destroy'), task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>

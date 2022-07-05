@@ -24,14 +24,14 @@ describe 'The function of task management', type: :model do
     end
   end
 
-  describe '検索機能' do
+  describe 'the function of search' do
 
     let!(:task) { FactoryBot.create(:task, name: 'task') }
     let!(:second_task) { FactoryBot.create(:second_task, name: "task 2") }
     let!(:third_task) { FactoryBot.create(:third_task, name: "sample")}
 
-    context 'scopeメソッドでタイトルのあいまい検索をした場合' do
-      it "検索キーワードを含むタスクが絞り込まれる" do
+    context 'to execute ambiguous search by names with scope method' do
+      it "is searched tasks which include search keyword" do
         expect(Task.search_by_name('task')).to include(task)
         expect(Task.search_by_name('task')).to include(second_task)
         expect(Task.search_by_name('task')).not_to include(third_task)
@@ -39,8 +39,8 @@ describe 'The function of task management', type: :model do
       end
     end
 
-    context 'scopeメソッドでステータス検索をした場合' do
-      it "ステータスに完全一致するタスクが絞り込まれる" do
+    context 'to execute exact match search by status with scope method' do
+      it "is searched tasks which match exactly" do
         expect(Task.search_by_status('not_yet')).to include(task)
         expect(Task.search_by_status('not_yet')).not_to include(second_task)
         expect(Task.search_by_status('not_yet')).not_to include(third_task)
@@ -48,8 +48,8 @@ describe 'The function of task management', type: :model do
       end
     end
 
-    context 'scopeメソッドでタイトルのあいまい検索とステータス検索をした場合' do
-      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+    context 'to execute ambiguous search by names and exact match search by status with scope method' do
+      it "is searched the tasks which include search keyword and the tasks which match exactly" do
         expect(Task.search_by_both('not_yet', 'task')).to include(task)
         expect(Task.search_by_both('not_yet', 'task')).not_to include(second_task)
         expect(Task.search_by_both('not_yet', 'task')).not_to include(third_task)
