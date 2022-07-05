@@ -46,6 +46,16 @@ RSpec.describe 'The function of task management', type: :system do
         expect(task_list[2]).to have_content('title 2')
       end
     end
+
+    context 'when the link for sorting by priority is clicked' do
+      it 'shows that tasks are arranged in ascending' do
+        click_link I18n.t('view.sort_link_priority')
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content('title 3')
+        expect(task_list[1]).to have_content('title 2')
+        expect(task_list[2]).to have_content('title 1')
+      end
+    end
   end
 
   describe 'to display show.html' do

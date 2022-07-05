@@ -9,6 +9,7 @@
   <%= f.submit t('view.search_button') %>
 <% end %>
 
+<%= link_to t('view.new_task'), new_task_path %>
 <%= link_to t('view.sort_link_deadline'), sort: :deadline, direction: :desc %>
 <%= link_to t('view.sort_link_priority'), sort: :priority, direction: :asc %>
 
@@ -38,6 +39,5 @@
   </tbody>
 </table>
 
-<br>
+<%= paginate @tasks %>
 
-<%= link_to t('view.new_task'), new_task_path %>

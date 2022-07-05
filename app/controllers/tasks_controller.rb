@@ -3,13 +3,13 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.all.order("#{sort_column} #{sort_direction}") and return unless params[:task].present?
+    @tasks = Task.all.order("#{sort_column} #{sort_direction}").page(params[:page]) and return unless params[:task].present?
     if params[:task][:status].present? && params[:task][:name].present?
-      @tasks = Task.search_by_both(params[:task][:status], params[:task][:name])
+      @tasks = Task.search_by_both(params[:task][:status], params[:task][:name]).page(params[:page])
     elsif params[:task][:status].present?
-      @tasks = Task.search_by_status(params[:task][:status])
+      @tasks = Task.search_by_status(params[:task][:status]).page(params[:page])
     elsif params[:task][:name]
-      @tasks = Task.search_by_name(params[:task][:name])
+      @tasks = Task.search_by_name(params[:task][:name]).page(params[:page])
     end
   end
 
@@ -46,19 +46,20 @@ class TasksController < ApplicationController
   end
 
   private
-    def set_task
-      @task = Task.find(params[:id])
-    end
+  
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    def task_params
-      params.require(:task).permit(:name, :content, :deadline, :status)
-    end
+  def task_params
+    params.require(:task).permit(:name, :content, :deadline, :status, :priority)
+  end
 
-    def sort_direction
-      %w[asc desc].include?(params[:direction])? params[:direction]: 'desc'
-    end
+  def sort_direction
+    %w[asc desc].include?(params[:direction])? params[:direction]: 'desc'
+  end
 
-    def sort_column
-      Task.column_names.include?(params[:sort])? params[:sort] : 'created_at'
-    end
+  def sort_column
+    Task.column_names.include?(params[:sort])? params[:sort] : 'created_at'
+  end
 end
