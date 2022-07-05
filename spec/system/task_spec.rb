@@ -39,7 +39,7 @@ RSpec.describe 'The function of task management', type: :system do
 
     context 'when the link for sorting by deadline is clicked' do
       it 'shows that tasks are arranged in descending' do
-        click_link I18n.t('view.sort_link_deadline')
+        click_link I18n.t('view.deadline')
         task_list = all('.task_row')
         expect(task_list[0]).to have_content('title 3')
         expect(task_list[1]).to have_content('title 1')
@@ -49,7 +49,7 @@ RSpec.describe 'The function of task management', type: :system do
 
     context 'when the link for sorting by priority is clicked' do
       it 'shows that tasks are arranged in ascending' do
-        click_link I18n.t('view.sort_link_priority')
+        click_link I18n.t('view.priority')
         task_list = all('.task_row')
         expect(task_list[0]).to have_content('title 3')
         expect(task_list[1]).to have_content('title 2')
