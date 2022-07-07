@@ -1,14 +1,34 @@
 ja:
   view:
-    error_count: '件のエラーがあります。'
+    task_manager: 'Task Manager'
+    create_task: 'タスク登録'
     tasks: 'タスク一覧'
+    account_details: 'アカウント詳細'
+    logout: 'ログアウト'
+    search_by_status: 'ステータスで検索'
+    search_button: '検索'
+    sort_link_deadline: '終了期限でソートする'
+    sort_link_priority: '優先度でソートする'
     name: 'タスク名'
-    content: '詳細'
-    edit: '編集'
-    back: '戻る'
+    deadline: '終了期限'
+    status: 'ステータス'
+    priority: '優先度'
     show: '詳細'
+    edit: '編集'
     destroy: '削除'
     new_task: '新規作成'
+    back: '戻る'
+    error_count: '件のエラーがあります。'
+  enums:
+    task:
+      priority:
+        high: '高'
+        medium: '中'
+        low: '低'
+      status:
+          not_yet: '未着手'
+          doing: '着手中'
+          done: '完了'
   activerecord:
     errors:
       messages:
@@ -22,6 +42,9 @@ ja:
       task:
         name: 'タスク名'
         content: '詳細'
+        deadline: '終了期限'
+        status: 'ステータス'
+        priority: '優先度'
   date:
     abbr_day_names:
     - 日

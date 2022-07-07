@@ -1,8 +1,16 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.all.order("created_at DESC")
+    @tasks = Task.all.order("#{sort_column} #{sort_direction}").page(params[:page]).per(10) and return unless params[:task].present?
+    if params[:task][:status].present? && params[:task][:name].present?
+      @tasks = Task.search_by_both(params[:task][:status], params[:task][:name]).page(params[:page]).per(10)
+    elsif params[:task][:status].present?
+      @tasks = Task.search_by_status(params[:task][:status]).page(params[:page]).per(10)
+    elsif params[:task][:name]
+      @tasks = Task.search_by_name(params[:task][:name]).page(params[:page]).per(10)
+    end
   end
 
   def show
@@ -24,7 +32,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     if @task.update(task_params)
       redirect_to task_url(@task), notice: "タスクを更新しました"
@@ -33,18 +40,26 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task.destroy
       redirect_to tasks_url, notice: "タスクを削除しました"
   end
 
   private
-    def set_task
-      @task = Task.find(params[:id])
-    end
+  
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    def task_params
-      params.require(:task).permit(:name, :string, :content)
-    end
+  def task_params
+    params.require(:task).permit(:name, :content, :deadline, :status, :priority)
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction])? params[:direction]: 'desc'
+  end
+
+  def sort_column
+    Task.column_names.include?(params[:sort])? params[:sort] : 'created_at'
+  end
 end

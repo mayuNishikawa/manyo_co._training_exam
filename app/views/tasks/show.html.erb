@@ -6,8 +6,23 @@
 </p>
 
 <p>
-  <strong><%= t('view.content') %></strong>
+  <strong><%= t('view.show') %></strong>
   <%= @task.content %>
+</p>
+
+<p>
+  <strong><%= t('view.deadline') %></strong>
+  <%= time_display(@task.deadline) %>
+</p>
+
+<p>
+  <strong><%= t('view.status') %></strong>
+  <%= t("enums.task.status.#{@task.status}") %>
+</p>
+
+<p>
+  <strong><%= t('view.priority') %></strong>
+  <%= t("enums.task.priority.#{@task.priority}") %>
 </p>
 
 <%= link_to t('view.edit'), edit_task_path(@task) %> |
