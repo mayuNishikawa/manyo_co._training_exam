@@ -5,6 +5,8 @@ ja:
     tasks: 'タスク一覧'
     account_details: 'アカウント詳細'
     logout: 'ログアウト'
+    login: 'ログイン'
+    sign_up: '新規登録'
     search_by_status: 'ステータスで検索'
     search_button: '検索'
     sort_link_deadline: '終了期限でソートする'
@@ -16,7 +18,7 @@ ja:
     show: '詳細'
     edit: '編集'
     destroy: '削除'
-    new_task: '新規作成'
+    new_task: 'タスク作成'
     back: '戻る'
     error_count: '件のエラーがあります。'
   enums:
