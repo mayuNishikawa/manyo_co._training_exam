@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: %i[ new create ]
+  before_action :forbid_current_user, only: %i[ new create ]
+  
   def new
     @user = User.new
   end
@@ -23,3 +25,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end
+
