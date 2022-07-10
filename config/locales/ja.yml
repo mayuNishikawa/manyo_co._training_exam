@@ -22,8 +22,12 @@ ja:
     back: '戻る'
     error_count: '件のエラーがあります。'
     are_you_sure?: '本当に削除しますか？'
-    create_user: 'ユーザーの新規作成'
     admin:
+      index: '管理画面のユーザー一覧画面'
+      create_user: 'ユーザーの新規作成'
+      number: '番号'
+      name: 'ユーザー名'
+      number_of_tasks: 'タスク数'
       edit_user: 'ユーザーの編集'
   enums:
     task:

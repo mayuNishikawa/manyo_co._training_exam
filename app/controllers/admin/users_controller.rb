@@ -1,8 +1,8 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy]
+  before_action :set_user, only: %i[ show edit update ]
 
   def index
-    @users = User.all
+    @users = User.select(:id, :name)
   end
 
   def show
@@ -13,7 +13,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-
   end
 
   def create

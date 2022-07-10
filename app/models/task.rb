@@ -9,5 +9,5 @@ class Task < ApplicationRecord
   scope :search_by_status, ->(pulldown){ where(status: "#{pulldown}") }
   scope :search_by_name, ->(keyword){ where('name LIKE ?', "%#{keyword}%") }
 
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
 end
