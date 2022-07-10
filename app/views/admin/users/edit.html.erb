@@ -1,4 +1,4 @@
-<h2><%= t('view.create_user') %></h2>
+<h2><%= t('view.admin.edit_user') %></h2>
 
 <% if @user.errors.any? %>
   <div id="error_explanation">
@@ -11,7 +11,7 @@
   </div>
 <% end %>
 
-<%= form_with(model: [:admin, @user], url: {controller: 'users', action: 'index'}, local: true) do |f| %>
+<%= form_with(model: [:admin, @user], local: true) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 

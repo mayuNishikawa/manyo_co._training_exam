@@ -39,7 +39,7 @@
         <td scope="col"><%= t("enums.task.priority.#{task.priority}") %></td>
         <td><%= link_to t('view.show'), task, class: "btn btn-outline-info" %></td>
         <td><%= link_to t('view.edit'), edit_task_path(task), class: "btn btn-outline-warning" %></td>
-        <td><%= link_to t('view.destroy'), task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
+        <td><%= link_to t('view.destroy'), task, method: :delete, data: { confirm: t('view.are_you_sure?') }, class: "btn btn-outline-danger" %></td>
       </tr>
     <% end %>
   </tbody>
