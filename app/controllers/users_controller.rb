@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: %i[ new create ]
-  before_action :set_user, only: %i[ show destroy]
+  before_action :set_user, only: %i[ show destroy ]
+  before_action :not_current_user, only: %i[ show ], unless: :ensure_admin?
 
   def new
     @user = User.new
@@ -16,11 +17,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    unless  @user == current_user
-      flash[:notice] == "他のユーザーのページにはアクセス出来ません"
-      redirect_to tasks_path
-    end
+  def show   
   end
 
   def destroy
@@ -36,6 +33,17 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def not_current_user
+    unless @user == current_user
+      flash[:notice] == "他のユーザーのページにはアクセス出来ません"
+      redirect_to tasks_path
+    end
+  end
+
+  def ensure_admin?
+    current_user.admin?
   end
 end
 
