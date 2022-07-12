@@ -1,0 +1,27 @@
+<h2><%= t('view.admin.index') %></h2>
+<p id="notice"><%= notice %></p>
+<%= link_to t('view.admin.create_user'), new_admin_user_path, class: "btn btn-outline-primary", id: "create_btn" %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col"><%= t('view.admin.number') %></th>
+      <th scope="col"><%= t('view.admin.name') %></th>
+      <th scope="col"><%= t('view.admin.number_of_tasks') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr class="task_row">
+        <td scope="col"><%= user.id %></td>
+        <td scope="col"><%= user.name %></td>
+        <td scope="col"><%= user.tasks.count %></td>
+        <td><%= link_to t('view.show'), user, class: "btn btn-outline-info" %></td>
+        <td><%= link_to t('view.edit'), edit_admin_user_path(user.id), class: "btn btn-outline-warning" %></td>
+        <td><%= link_to t('view.destroy'), user, method: :delete, data: { confirm: t('view.are_you_sure?') }, class: "btn btn-outline-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

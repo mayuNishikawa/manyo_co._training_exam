@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1><%= t('view.tasks') %></h1>
 
 <%= form_with(url: tasks_path, local: true, method: :get, scope: :task, class: "form-group" ) do |f| %>
@@ -17,12 +15,14 @@
   </div>
 <% end %>
 
+<p id="notice"><%= notice %></p>
 <%= link_to t('view.new_task'), new_task_path, class: "btn btn-outline-primary", id: "create_btn" %>
 
 <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col"><%= t('view.name') %></th>
+      <th scope="col"><%= t('view.creator') %></th>
       <th scope="col"><%= link_to t('view.deadline'), sort: :deadline, direction: :desc %></th>
       <th scope="col"><%= t('view.status') %></th>
       <th scope="col"><%= link_to t('view.priority'), sort: :priority, direction: :asc %></th>
@@ -34,12 +34,13 @@
     <% @tasks.each do |task| %>
       <tr class="task_row">
         <td scope="col"><%= task.name %></td>
+        <td scope="col"><%= task.user.name %></td>
         <td scope="col"><%= time_display(task.deadline) %></td>
         <td scope="col"><%= t("enums.task.status.#{task.status}") %></td>
         <td scope="col"><%= t("enums.task.priority.#{task.priority}") %></td>
         <td><%= link_to t('view.show'), task, class: "btn btn-outline-info" %></td>
         <td><%= link_to t('view.edit'), edit_task_path(task), class: "btn btn-outline-warning" %></td>
-        <td><%= link_to t('view.destroy'), task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
+        <td><%= link_to t('view.destroy'), task, method: :delete, data: { confirm: t('view.are_you_sure?') }, class: "btn btn-outline-danger" %></td>
       </tr>
     <% end %>
   </tbody>

@@ -4,21 +4,33 @@ ja:
     create_task: 'タスク登録'
     tasks: 'タスク一覧'
     account_details: 'アカウント詳細'
+    admin: 'ユーザー管理'
     logout: 'ログアウト'
+    login: 'ログイン'
+    sign_up: '新規登録'
     search_by_status: 'ステータスで検索'
     search_button: '検索'
     sort_link_deadline: '終了期限でソートする'
     sort_link_priority: '優先度でソートする'
     name: 'タスク名'
+    creator: '作成者'
     deadline: '終了期限'
     status: 'ステータス'
     priority: '優先度'
     show: '詳細'
     edit: '編集'
     destroy: '削除'
-    new_task: '新規作成'
+    submit: '登録'
     back: '戻る'
     error_count: '件のエラーがあります。'
+    are_you_sure?: '本当に削除しますか？'
+    admin:
+      index: '管理画面のユーザー一覧画面'
+      create_user: 'ユーザーの新規作成'
+      number: '番号'
+      name: 'ユーザー名'
+      number_of_tasks: 'タスク数'
+      edit_user: 'ユーザーの編集'
   enums:
     task:
       priority:
@@ -38,6 +50,7 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       task: 'タスク'
+      user: 'ユーザー'
     attributes:
       task:
         name: 'タスク名'
@@ -45,6 +58,13 @@ ja:
         deadline: '終了期限'
         status: 'ステータス'
         priority: '優先度'
+      user: 
+        name: '名前'
+        email: 'メールアドレス'
+        current_password: '現在のパスワード'
+        password: 'パスワード'
+        password_confirmation: '確認用パスワード'
+        admin: '権限'
   date:
     abbr_day_names:
     - 日
