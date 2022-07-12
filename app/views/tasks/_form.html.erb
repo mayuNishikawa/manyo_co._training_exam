@@ -38,6 +38,11 @@
       |k| [t("enums.task.priority.#{k}"), k]}),{ prompt: t('view.search_by_priority') } %>
   </div>
 
+  <div class="field">
+    <%= f.label :lebel %>
+    <%= f.checkbox :label_ids,{ multiple: true, checked: @task.labels.find_by(id: label.id).present?, include_hidden: false }, label[:id] %>
+  </div> 
+
   <div class="actions">
     <%= f.submit t('view.submit') %>
   </div>
