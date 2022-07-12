@@ -9,6 +9,6 @@
 User.create!(
   name: "mayu nishikawa",
   email: "mayu@example.com",
-  password: "nisinisi"
+  password: "nisinisi",
   admin: true
 )

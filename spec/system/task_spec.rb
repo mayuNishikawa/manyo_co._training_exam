@@ -2,9 +2,14 @@ require 'rails_helper'
 RSpec.describe 'The function of task management', type: :system do
 
   describe 'the function of to create task' do
+    let!(:user){ FactoryBot.create(:user) }
     context 'creating task' do
       it 'is shown at index' do
-        task = FactoryBot.create(:task)
+        task = FactoryBot.create(:task, user: user)
+        visit new_session_path
+        fill_in 'session[email]', with: user.email
+        fill_in 'session[password]', with: user.password
+        click_button 'ログイン'
         visit tasks_path
         expect(page).to have_content '未着手'
       end
@@ -12,11 +17,15 @@ RSpec.describe 'The function of task management', type: :system do
   end
 
   describe 'to display index.html' do
-
-    before do
-      FactoryBot.create(:task)
-      FactoryBot.create(:second_task)
-      FactoryBot.create(:third_task)
+    let!(:user){ FactoryBot.create(:user) }
+    before do    
+      FactoryBot.create(:task, user: user)
+      FactoryBot.create(:second_task, user: user)
+      FactoryBot.create(:third_task, user: user)
+      visit new_session_path
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: user.password
+      click_button 'ログイン'
       visit tasks_path
     end
 
@@ -61,9 +70,15 @@ RSpec.describe 'The function of task management', type: :system do
   end
 
   describe 'to display show.html' do
+    let!(:user){ FactoryBot.create(:user) }
     context 'visiting one page' do
       it 'is shown that page' do
-        task = FactoryBot.create(:second_task, name: 'aaaaa')
+        task = FactoryBot.create(:second_task, user: user, name: 'aaaaa')
+        visit new_session_path
+        fill_in 'session[email]', with: user.email
+        fill_in 'session[password]', with: user.password
+        click_button 'ログイン'
+        visit tasks_path
         visit task_path(task)
         expect(page).to have_content 'aaaaa'
       end
@@ -71,10 +86,15 @@ RSpec.describe 'The function of task management', type: :system do
   end
 
   describe 'the function of search' do
+    let!(:user){ FactoryBot.create(:user) }
     before do
-      FactoryBot.create(:task)
-      FactoryBot.create(:second_task)
-      FactoryBot.create(:third_task, name: 'aaaaa')
+      FactoryBot.create(:task, user: user)
+      FactoryBot.create(:second_task, user: user)
+      FactoryBot.create(:third_task, user: user, name: 'aaaaa')
+      visit new_session_path
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: user.password
+      click_button 'ログイン'
       visit tasks_path
     end
 

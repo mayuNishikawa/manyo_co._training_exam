@@ -17,12 +17,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def show   
+  def show
+    @tasks = current_user.tasks
   end
 
-  def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice: "ユーザーを削除しました"
+  def destroy  
+    if @user.destroy
+      redirect_to admin_users_path, notice: "ユーザーを削除しました"
+    else
+      redirect_to admin_users_path
+      flash[:notice] = '管理者は最低1人必要です'
+    end
   end
 
   private

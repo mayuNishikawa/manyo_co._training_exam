@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update ]
+  before_action :only_admin
 
   def index
     @users = User.select(:id, :name)
@@ -26,9 +27,10 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_url(@user), notice: "ユーザー情報を更新しました"
+      redirect_to admin_users_path, notice: "ユーザー情報を更新しました"
     else
-      render :edit, status: :unprocessable_entity
+      redirect_to tasks_path
+      flash[:notice] = '管理者は最低1人必要です'
     end
   end
 
@@ -39,6 +41,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
 end

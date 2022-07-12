@@ -9,4 +9,9 @@ class ApplicationController < ActionController::Base
     flash[:notice] == "ログインしてください"
     redirect_to new_session_path unless current_user
   end
+
+  def only_admin
+    flash[:notice] == "管理者以外はアクセス出来ません"
+    redirect_to tasks_path unless current_user.admin?
+  end
 end

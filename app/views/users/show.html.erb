@@ -1,1 +1,25 @@
-<h1>my page</h1>
+<h2><%= t('view.account_details') %></h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col"><%= t('view.name') %></th>
+      <th scope="col"><%= t('view.creator') %></th>
+      <th scope="col"><%= link_to t('view.deadline'), sort: :deadline, direction: :desc %></th>
+      <th scope="col"><%= t('view.status') %></th>
+      <th scope="col"><%= link_to t('view.priority'), sort: :priority, direction: :asc %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr class="task_row">
+        <td scope="col"><%= task.name %></td>
+        <td scope="col"><%= task.user.name %></td>
+        <td scope="col"><%= time_display(task.deadline) %></td>
+        <td scope="col"><%= t("enums.task.status.#{task.status}") %></td>
+        <td scope="col"><%= t("enums.task.priority.#{task.priority}") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
