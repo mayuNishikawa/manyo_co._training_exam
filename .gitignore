@@ -39,4 +39,3 @@ yarn-debug.log*
 /public/uploades
 .DS_Store
 .env
-database.yml
