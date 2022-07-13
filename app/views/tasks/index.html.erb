@@ -14,6 +14,10 @@
     </div>
   </div>
 <% end %>
+<%= form_with url: tasks_path, method: :get, local: true do |form| %>
+  <%= form.select :label_id, Label.pluck(:name, :id), { include_blank: true } %>
+  <%= form.submit 'Search', name: nil %>
+<% end %>
 
 <p id="notice"><%= notice %></p>
 <%= link_to t('view.new_task'), new_task_path, class: "btn btn-outline-primary", id: "create_btn" %>
@@ -22,6 +26,7 @@
   <thead>
     <tr>
       <th scope="col"><%= t('view.name') %></th>
+      <th colspan="1"></th>
       <th scope="col"><%= t('view.creator') %></th>
       <th scope="col"><%= link_to t('view.deadline'), sort: :deadline, direction: :desc %></th>
       <th scope="col"><%= t('view.status') %></th>
@@ -34,6 +39,11 @@
     <% @tasks.each do |task| %>
       <tr class="task_row">
         <td scope="col"><%= task.name %></td>
+        <td>
+          <% task.labels.each do |label| %>
+            <label class='badge badge-secondary'><%= label.name %></label>
+          <% end %>
+        </td>
         <td scope="col"><%= task.user.name %></td>
         <td scope="col"><%= time_display(task.deadline) %></td>
         <td scope="col"><%= t("enums.task.status.#{task.status}") %></td>
@@ -45,6 +55,5 @@
     <% end %>
   </tbody>
 </table>
-
 <%= paginate @tasks, theme: 'twitter-bootstrap-4' %>
 

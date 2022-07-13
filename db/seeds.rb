@@ -8,7 +8,12 @@
 
 User.create!(
   name: "mayu nishikawa",
-  email: "mayu@example.com",
+  email: "admin.mayu@example.com",
   password: "nisinisi",
   admin: true
 )
+
+Label.create!(name: "開発")
+Label.create!(name: "運用")
+Label.create!(name: "検討課題")
+Label.create!(name: "ミーティング")

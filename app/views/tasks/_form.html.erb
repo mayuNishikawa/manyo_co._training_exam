@@ -39,9 +39,17 @@
   </div>
 
   <div class="field">
-    <%= f.label :lebel %>
-    <%= f.checkbox :label_ids,{ multiple: true, checked: @task.labels.find_by(id: label.id).present?, include_hidden: false }, label[:id] %>
-  </div> 
+    <% Label.all.each do |label| %>
+      <% if action_name == 'new' || action_name == 'create' %>
+        <%= f.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false}, label[:id] %>
+        <label><%= label.name %></label>
+      <% elsif action_name == 'edit' %>
+        <%= f.check_box :label_ids, { multiple: true,
+            checked: task.label_ids.include?(label.id), disabled: label[:disabled], include_hidden: false}, label[:id] %>
+        <label class='badge badge-secondary'><%= label.name %></label>
+      <% end %>
+    <% end %>
+  </div>
 
   <div class="actions">
     <%= f.submit t('view.submit') %>
