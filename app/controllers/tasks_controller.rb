@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
+    @tasks = current_user.tasks.joins(:labels).where(labels: { id: params[:label_search]}).page(params[:page]).per(10) and return if params[:label_search].present?
     @tasks = current_user.tasks.order("#{sort_column} #{sort_direction}").page(params[:page]).per(10) and return unless params[:task].present?
     if params[:task][:status].present? && params[:task][:name].present?
       @tasks = current_user.tasks.search_by_both(params[:task][:status], params[:task][:name]).page(params[:page]).per(10)
@@ -52,7 +53,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :content, :deadline, :status, :priority)
+    params.require(:task).permit(:name, :content, :deadline, :status, :priority, label_ids: [])
   end
 
   def sort_direction
